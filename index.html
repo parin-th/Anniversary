@@ -10,30 +10,28 @@
 </head>
 <body class="text-slate-800 flex flex-col min-h-screen">
 
-    <!-- Header -->
     <header class="py-10 text-center bg-rose-50 border-b border-rose-100">
         <h1 class="fancy-font text-5xl md:text-7xl text-rose-600">Happy 24th Anniversary</h1>
         <p class="text-lg md:text-xl font-light text-rose-400 italic">Mom & Dad</p>
     </header>
 
-    <!-- Slideshow Section -->
     <main class="flex-grow flex items-center justify-center p-4">
         <div class="max-w-3xl w-full bg-white rounded-3xl overflow-hidden shadow-xl border border-rose-100">
             
-            <!-- PHOTO AREA -->
-            <div id="photo-display" class="relative h-[300px] md:h-[500px] bg-slate-900 flex items-center justify-center overflow-hidden">
+            <div id="photo-display" class="relative h-[350px] md:h-[550px] bg-slate-900 flex items-center justify-center overflow-hidden">
                 <img id="current-img" src="" alt="Memory" class="max-h-full max-w-full object-contain">
             </div>
             
             <div class="p-8 text-center bg-white">
-                <p id="current-count" class="text-xs font-bold uppercase tracking-widest text-rose-300 mb-2"></p>
-                
-                <!-- CAPTION AREA -->
+                <div class="flex flex-col items-center mb-2">
+                    <p id="current-count" class="text-xs font-bold uppercase tracking-widest text-rose-300"></p>
+                    <p id="current-date" class="text-sm font-semibold text-slate-400 mt-1"></p>
+                </div>
+
                 <div class="h-[80px] flex items-center justify-center">
                     <p id="current-caption" class="text-xl md:text-2xl text-slate-700 italic px-4 leading-tight"></p>
                 </div>
                 
-                <!-- Navigation Buttons -->
                 <div class="mt-6 flex justify-center gap-4">
                     <button onclick="prevPhoto()" class="px-6 py-2 bg-rose-50 text-rose-600 rounded-full hover:bg-rose-100 transition font-semibold">← Back</button>
                     <button onclick="nextPhoto()" class="px-6 py-2 bg-rose-600 text-white rounded-full hover:bg-rose-700 transition shadow-md font-semibold">Next →</button>
@@ -42,7 +40,6 @@
         </div>
     </main>
 
-    <!-- Footer -->
     <footer class="py-6 text-center text-slate-400 text-sm">
         Made with ❤️ for your 24th year together
     </footer>
