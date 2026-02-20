@@ -70,12 +70,13 @@
         }
     </style>
 </head>
-<body class="min-h-screen pb-20">    <div class="max-w-6xl mx-auto px-4 pt-6">
+<body class="min-h-screen pb-20">
+    <!-- Navigation -->
+    <div class="max-w-6xl mx-auto px-4 pt-6">
         <a href="index.html" class="inline-flex items-center gap-2 px-4 py-2 bg-white text-rose-600 rounded-full font-semibold shadow-sm border border-rose-100 hover:bg-rose-50 transition">
             ← Back to Memories
         </a>
     </div>
-
 
     <header class="py-8 text-center bg-rose-50 border-b border-rose-100 mb-8">
         <h1 class="fancy-font text-5xl text-rose-600">The Anniversary Crossword</h1>
@@ -83,7 +84,7 @@
     </header>
 
     <main class="max-w-6xl mx-auto px-4 grid grid-cols-1 lg:grid-cols-12 gap-10">
-        
+        <!-- Grid Section -->
         <div class="lg:col-span-7 flex flex-col items-center">
             <div id="grid-container" class="crossword-grid shadow-2xl"></div>
             
@@ -97,6 +98,7 @@
             </div>
         </div>
 
+        <!-- Clues Section -->
         <div class="lg:col-span-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1 gap-6">
             <div class="bg-white p-6 rounded-3xl shadow-sm border border-rose-100">
                 <h2 class="text-xl font-bold text-rose-600 mb-4 border-b-2 border-rose-50 pb-2">Across</h2>
@@ -111,19 +113,20 @@
     </main>
 
     <script>
+        // Data for exactly 12 items
         const crosswordData = [
-            { num: 1, x: 3, y: 2, dir: 'H', ans: 'FEBRUARY', clue: 'The month you said "I Do"' },
+            { num: 1, x: 2, y: 2, dir: 'H', ans: 'FEBRUARY', clue: 'The month you said "I Do"' },
             { num: 2, x: 1, y: 1, dir: 'V', ans: 'VADODARA', clue: 'The city where our story has deep roots' },
-            { num: 3, x: 8, y: 1, dir: 'V', ans: 'NATIVELANDING', clue: 'The street name of our first family house' },
+            { num: 3, x: 7, y: 1, dir: 'V', ans: 'NATIVELANDING', clue: 'The street name of our first house' },
             { num: 4, x: 1, y: 3, dir: 'H', ans: 'DREAMS', clue: 'Everything you have achieved together' },
-            { num: 5, x: 11, y: 2, dir: 'V', ans: 'TWENTYFOUR', clue: 'Total years you have been married' },
-            { num: 6, x: 5, y: 6, dir: 'H', ans: 'EUROPE', clue: 'The continent of your dream vacation' },
-            { num: 7, x: 1, y: 8, dir: 'H', ans: 'TEA', clue: "Dad's go-to morning drink" },
-            { num: 8, x: 1, y: 8, dir: 'V', ans: 'THANKS', clue: "What we want to say to you today" },
-            { num: 9, x: 3, y: 14, dir: 'H', ans: 'WRITEITDOWN', clue: "The most important instruction before a big test!" },
-            { num: 10, x: 1, y: 11, dir: 'H', ans: 'NUTS', clue: "The snack Dad always sneaks from the pantry" },
+            { num: 5, x: 11, y: 1, dir: 'V', ans: 'TWENTYFOUR', clue: 'Total years you have been married' },
+            { num: 6, x: 9, y: 5, dir: 'H', ans: 'EUROPE', clue: 'The continent of your dream vacation' },
+            { num: 7, x: 5, y: 8, dir: 'H', ans: 'SMILE', clue: "Mom's catchphrase: 'Always remember to...'" },
+            { num: 8, x: 1, y: 8, dir: 'V', ans: 'THANKS', clue: "What we want to say to you" },
+            { num: 9, x: 1, y: 11, dir: 'H', ans: 'NUTS', clue: "The snack Dad always sneaks from the pantry" },
+            { num: 10, x: 2, y: 14, dir: 'H', ans: 'WRITEITDOWN', clue: "The most important instruction before a big test!" },
             { num: 11, x: 14, y: 1, dir: 'V', ans: 'FOREVER', clue: "How long we will love each other" },
-            { num: 12, x: 13, y: 8, dir: 'V', ans: 'PIZZA', clue: "A weekend family food favorite" }
+            { num: 12, x: 13, y: 9, dir: 'V', ans: 'PIZZA', clue: "A weekend family food favorite" }
         ];
 
         const gridSize = 15;
@@ -132,6 +135,7 @@
         const downClues = document.getElementById('down-clues');
 
         function buildGrid() {
+            // Initial blank black grid
             for (let y = 0; y < gridSize; y++) {
                 for (let x = 0; x < gridSize; x++) {
                     const cell = document.createElement('div');
@@ -141,6 +145,7 @@
                 }
             }
 
+            // Populate words
             crosswordData.forEach(item => {
                 for (let i = 0; i < item.ans.length; i++) {
                     const cx = item.dir === 'H' ? item.x + i : item.x;
@@ -155,20 +160,26 @@
                         input.dataset.y = cy;
                         cell.appendChild(input);
                         
+                        // Auto-navigation
                         input.addEventListener('input', (e) => {
                             if (e.target.value.length === 1) {
-                                const next = findCell(cx + (item.dir === 'H' ? 1 : 0), cy + (item.dir === 'V' ? 1 : 0));
+                                const nextX = cx + (item.dir === 'H' ? 1 : 0);
+                                const nextY = cy + (item.dir === 'V' ? 1 : 0);
+                                const next = findCell(nextX, nextY);
                                 if (next) next.focus();
                             }
                         });
                         input.addEventListener('keydown', (e) => {
                             if (e.key === 'Backspace' && !e.target.value) {
-                                const prev = findCell(cx - (item.dir === 'H' ? 1 : 0), cy - (item.dir === 'V' ? 1 : 0));
+                                const prevX = cx - (item.dir === 'H' ? 1 : 0);
+                                const prevY = cy - (item.dir === 'V' ? 1 : 0);
+                                const prev = findCell(prevX, prevY);
                                 if (prev) prev.focus();
                             }
                         });
                     }
 
+                    // Add Number
                     if (i === 0) {
                         const num = document.createElement('span');
                         num.className = 'cell-num';
@@ -177,6 +188,7 @@
                     }
                 }
 
+                // Append clues to list
                 const li = document.createElement('li');
                 li.innerHTML = `<strong>${item.num}.</strong> ${item.clue}`;
                 (item.dir === 'H' ? acrossClues : downClues).appendChild(li);
