@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>24th Anniversary Crossword</title>
+    <title>23rd Anniversary Crossword</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Inter:wght@400;700&display=swap" rel="stylesheet">
     <style>
@@ -12,8 +12,8 @@
         
         .crossword-grid {
             display: grid;
-            grid-template-columns: repeat(22, 30px);
-            grid-template-rows: repeat(20, 30px);
+            grid-template-columns: repeat(24, 30px);
+            grid-template-rows: repeat(22, 30px);
             gap: 1px;
             background-color: #1e293b;
             border: 4px solid #1e293b;
@@ -65,8 +65,8 @@
         
         @media (max-width: 640px) {
             .crossword-grid {
-                grid-template-columns: repeat(22, 16px);
-                grid-template-rows: repeat(20, 16px);
+                grid-template-columns: repeat(24, 16px);
+                grid-template-rows: repeat(22, 16px);
             }
             .cell { width: 16px; height: 16px; }
             .cell input { font-size: 8px; }
@@ -83,7 +83,7 @@
 
     <header class="py-8 text-center bg-rose-50 border-b border-rose-100 mb-8">
         <h1 class="fancy-font text-5xl text-rose-600">The Anniversary Crossword</h1>
-        <p class="text-rose-400 italic mt-2">12 Clues. 24 Years. One Team.</p>
+        <p class="text-rose-400 italic mt-2">12 Clues. 23 Years. One Team.</p>
     </header>
 
     <main class="max-w-6xl mx-auto px-4 grid grid-cols-1 lg:grid-cols-12 gap-10">
@@ -97,7 +97,7 @@
             
             <div id="win-message" class="hidden mt-6 p-4 bg-green-100 text-green-800 rounded-2xl border-2 border-green-200 text-center animate-bounce">
                 <p class="text-xl font-bold">🎉 Perfect Score!</p>
-                <p>Happy 24th Anniversary!</p>
+                <p>Happy 23rd Anniversary!</p>
             </div>
         </div>
 
@@ -115,27 +115,26 @@
     </main>
 
     <script>
-        // MANUALLY VERIFIED COORDINATES FOR ZERO CONFLICTS
         const crosswordData = [
             // ACROSS
-            { num: 1, x: 4, y: 2, dir: 'H', ans: 'FEBRUARY', clue: 'The month you said "I Do"' },
-            { num: 4, x: 2, y: 3, dir: 'H', ans: 'DREAMS', clue: 'Everything you have achieved together' }, 
-            { num: 6, x: 13, y: 8, dir: 'H', ans: 'EUROPE', clue: 'The continent of your dream vacation' },
-            { num: 7, x: 0, y: 17, dir: 'H', ans: 'WRITEITDOWN', clue: "Mom's Test must-do" },
-            { num: 9, x: 1, y: 0, dir: 'H', ans: 'ICECREAM', clue: "Dad's favorite non-indian sweet" },
-            { num: 10, x: 0, y: 19, dir: 'H', ans: 'HASHBROWN', clue: "Breakfast item prepared today" },
+            { num: 1, x: 5, y: 2, dir: 'H', ans: 'FEBRUARY', clue: 'The month you said "I Do"' },
+            { num: 2, x: 0, y: 12, dir: 'H', ans: 'VADODARA', clue: 'The city where our story has deep roots' },
+            { num: 4, x: 7, y: 8, dir: 'H', ans: 'DREAMS', clue: 'Everything you have achieved together' }, 
+            { num: 6, x: 13, y: 4, dir: 'H', ans: 'EUROPE', clue: 'The continent of your dream vacation' },
+            { num: 7, x: 6, y: 6, dir: 'H', ans: 'WRITEITDOWN', clue: "Mom's Test must-do" },
+            { num: 9, x: 10, y: 11, dir: 'H', ans: 'ICECREAM', clue: "Dad's favorite non-indian sweet" },
+            { num: 10, x: 15, y: 9, dir: 'H', ans: 'HASHBROWN', clue: "Breakfast item prepared today" },
             
             // DOWN
-            { num: 2, x: 2, y: 1, dir: 'V', ans: 'VADODARA', clue: 'The city where our story has deep roots' },
-            { num: 3, x: 9, y: 1, dir: 'V', ans: 'NATIVELANDING', clue: 'The street name of our first family house' },
-            { num: 5, x: 12, y: 1, dir: 'V', ans: 'TWENTYFOUR', clue: 'Total years you have been married' },
+            { num: 3, x: 10, y: 1, dir: 'V', ans: 'NATIVELANDING', clue: 'The street name of our first family house' },
+            { num: 5, x: 18, y: 2, dir: 'V', ans: 'TWENTYTHREE', clue: 'Total years you have been married' },
             { num: 8, x: 0, y: 5, dir: 'V', ans: 'THANKS', clue: "What we want to say to you today" },
-            { num: 11, x: 20, y: 1, dir: 'V', ans: 'FOREVER', clue: "How long we will love each other" },
-            { num: 12, x: 16, y: 10, dir: 'V', ans: 'PIZZA', clue: "A weekend family food favorite" }
+            { num: 11, x: 20, y: 7, dir: 'V', ans: 'FOREVER', clue: "How long we will love each other" },
+            { num: 12, x: 5, y: 8, dir: 'V', ans: 'PIZZA', clue: "A weekend family food favorite" }
         ];
 
-        const gridWidth = 22;
-        const gridHeight = 20;
+        const gridWidth = 24;
+        const gridHeight = 22;
         const gridContainer = document.getElementById('grid-container');
         const acrossClues = document.getElementById('across-clues');
         const downClues = document.getElementById('down-clues');
@@ -169,7 +168,6 @@
                         
                         input.addEventListener('input', (e) => {
                             if (e.target.value.length === 1) {
-                                // Auto-focus next box logic
                                 const nextX = cx + (item.dir === 'H' ? 1 : 0);
                                 const nextY = cy + (item.dir === 'V' ? 1 : 0);
                                 const next = inputs[`${nextX}-${nextY}`];
